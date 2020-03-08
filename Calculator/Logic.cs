@@ -12,7 +12,11 @@ namespace Calculator
     {
         public static void Resize(TextBox sender)
         {
-            if (sender.Text.Length > 13)
+            if (sender.Text.Length >= 22)
+            {
+                sender.FontSize = 16;
+            }
+            else if (sender.Text.Length > 13 && sender.Text.Length < 22)
             {
                 sender.FontSize = 23;
             }
@@ -26,7 +30,7 @@ namespace Calculator
             btn.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         }
 
-        public static void DoMath(TextBox input, TextBox output, char action, ref bool isFull, ref bool read, ref string last)
+        public static void DoMath(TextBox input, TextBox output, char action, ref bool error, ref bool read, ref string last)
         {
             string _in = input.Text;
             string _out = output.Text;
@@ -55,7 +59,7 @@ namespace Calculator
                     else
                     {
                         output.Text = _out + ' ' + _in  + ' ' + action;
-                        input.Text = Logic.Calculate(_out + ' ' + _in);
+                        input.Text = Logic.Calculate(_out + ' ' + _in, ref error);
                         read = false;
                     }
                 }
@@ -71,56 +75,67 @@ namespace Calculator
                     if (_out.Last() == '=')
                     {
                         output.Text = _in + last + " =";
-                        input.Text = Logic.Calculate(_in + last);
+                        input.Text = Logic.Calculate(_in + last, ref error);
                     }
                     else
                     {
                         last = ' '+ _out.Last().ToString() + ' ' + _in;
-                        input.Text = Logic.Calculate(_out + ' ' + _in);
+                        input.Text = Logic.Calculate(_out + ' ' + _in, ref error);
                         output.Text = _out + ' ' + _in + " =";
                     }
                 }
                 read = false;
             }
+            output.Select(output.Text.Length, 0);
+            output.Focus();
         }
 
-        private static string Calculate(string calc)
+        private static string Calculate(string calc, ref bool error)
         {
-            List<string> elements = calc.Split(' ').ToList();
-            int index;
-            decimal tmp;
-            while(elements.Count() > 1)
+            try
             {
-                if (elements.Contains("/") || elements.Contains("*"))
+                List<string> elements = calc.Split(' ').ToList();
+                int index;
+                decimal tmp;
+                while (elements.Count() > 1)
                 {
-                    index = elements.FindIndex(x => x == "/" || x == "*");
+                    if (elements.Contains("/") || elements.Contains("*"))
+                    {
+                        index = elements.FindIndex(x => x == "/" || x == "*");
+                    }
+                    else
+                    {
+                        index = elements.FindIndex(x => x == "+" || x == "-");
+                    }
+
+                    if (elements[index] == "/")
+                    {
+                        tmp = Decimal.Parse(elements[index - 1]) / Decimal.Parse(elements[index + 1]);
+                    }
+                    else if (elements[index] == "*")
+                    {
+                        tmp = Decimal.Parse(elements[index - 1]) * Decimal.Parse(elements[index + 1]);
+                    }
+                    else if (elements[index] == "+")
+                    {
+                        tmp = Decimal.Parse(elements[index - 1]) + Decimal.Parse(elements[index + 1]);
+                    }
+                    else
+                    {
+                        tmp = Decimal.Parse(elements[index - 1]) - Decimal.Parse(elements[index + 1]);
+                    }
+                    elements[index] = Decimal.Round(tmp, 16).ToString();
+                    elements.RemoveAt(index + 1);
+                    elements.RemoveAt(index - 1);
                 }
-                else
-                {
-                    index = elements.FindIndex(x => x == "+" || x == "-");
-                }
-                
-                if (elements[index] == "/")
-                {
-                    tmp = Decimal.Parse(elements[index - 1]) / Decimal.Parse(elements[index + 1]);
-                }
-                else if (elements[index] == "*")
-                {
-                    tmp = Decimal.Parse(elements[index - 1]) * Decimal.Parse(elements[index + 1]);
-                }
-                else if (elements[index] == "+")
-                {
-                    tmp = Decimal.Parse(elements[index - 1]) + Decimal.Parse(elements[index + 1]);
-                }
-                else
-                {
-                    tmp = Decimal.Parse(elements[index - 1]) - Decimal.Parse(elements[index + 1]);
-                }
-                elements[index] = tmp.ToString();
-                elements.RemoveAt(index + 1);
-                elements.RemoveAt(index - 1);
+
+                return elements[0];
             }
-            return elements[0];
+            catch
+            {
+                error = true;
+                return "Error";
+            }
         }
     }
 }

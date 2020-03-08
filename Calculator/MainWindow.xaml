@@ -98,7 +98,7 @@
                 <Button Grid.Column="0" Name="backspace" Content="&#9003;" Style="{DynamicResource Action}" Click="Backspace_Click" PreviewKeyDown="Block_Enter"/>
                 <Button Grid.Column="1" Name="clearall" Content="C" Style="{DynamicResource Action}" Click="ClearAll_Click" PreviewKeyDown="Block_Enter"/>
                 <Button Grid.Column="2" Name="clear" Content="CE" Style="{DynamicResource Action}" Click="Clear_Click" PreviewKeyDown="Block_Enter"/>
-                <Button Grid.Column="3" Name="equals" Content="=" Style="{DynamicResource Equals}" Click="Equals_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="3" Name="equals" Content="=" Style="{DynamicResource Equals}" Click="Action_Click" PreviewKeyDown="Block_Enter"/>
             </Grid>
         </Grid>
     </Grid>

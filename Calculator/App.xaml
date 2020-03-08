@@ -72,7 +72,7 @@
         </Style>
 
         <Style TargetType="TextBox" x:Key="Memory" BasedOn="{StaticResource {x:Type TextBox}}">
-            
+
         </Style>
 
         <Style TargetType="TextBox" x:Key="Input" BasedOn="{StaticResource {x:Type TextBox}}">

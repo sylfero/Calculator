@@ -20,7 +20,7 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool isFull = false;
+        private bool error = false;
         private bool read = false;
         private string last;
 
@@ -31,6 +31,7 @@ namespace Calculator
 
         private void Number_Click(object sender, RoutedEventArgs e)
         {
+            Error();
             Button button = (Button)sender;
             string num = button.Content.ToString();
             if (read == false)
@@ -61,27 +62,30 @@ namespace Calculator
 
         private void Action_Click(object sender, RoutedEventArgs e)
         {
+            Error();
             Button btn = (Button)sender;
-            Logic.DoMath(input, memory, btn.Content.ToString().First(), ref isFull, ref read, ref last);
-        }
-
-        private void Equals_Click(object sender, RoutedEventArgs e)
-        {
-            Logic.DoMath(input, memory, '=', ref isFull, ref read, ref last);
+            Logic.DoMath(input, memory, btn.Content.ToString().First(), ref error, ref read, ref last);
+            Logic.Resize(input);
         }
 
         private void Zero_Click(object sender, RoutedEventArgs e)
         {
-            if (!input.Text.Equals("0") && input.Text.Length < 21)
+            Error();
+            if (read == false)
+            {
+                input.Text = "0";
+                read = true;
+            }
+            else if (!input.Text.Equals("0") && input.Text.Length < 21)
             {
                 input.Text += '0';
                 Logic.Resize(input);
-                read = true;
             }
         }
 
         private void Backspace_Click(object sender, RoutedEventArgs e)
         {
+            Error();
             if (read != false)
             {
                 if (!input.Text.Equals("0"))
@@ -108,6 +112,7 @@ namespace Calculator
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
+            Error();
             input.Text = "0";
             read = true;
             Logic.Resize(input);
@@ -182,7 +187,7 @@ namespace Calculator
                 {
                     Logic.PerformClick(equals);
                 }
-                else if (e.Key == Key.OemTilde)
+                else if (e.Key == Key.OemQuestion)
                 {
                     Logic.PerformClick(divide);
                 }
@@ -197,11 +202,16 @@ namespace Calculator
                 {
                     Logic.PerformClick(add);
                 }
+                else if (e.Key == Key.D8)
+                {
+                    Logic.PerformClick(multiply);
+                }
             }
         }
 
         private void Negation_Click(object sender, RoutedEventArgs e)
         {
+            Error();
             if (Decimal.Parse(input.Text) != 0)
             {
                 if (Decimal.Parse(input.Text) < 0)
@@ -222,6 +232,7 @@ namespace Calculator
 
         private void Point_Click(object sender, RoutedEventArgs e)
         {
+            Error();
             if (!input.Text.Contains(',') && input.Text.Length < 21)
             {
                 input.Text += ',';
@@ -235,6 +246,17 @@ namespace Calculator
             if (e.Key == Key.Enter)
             {
                 e.Handled = true;
+                Logic.PerformClick(equals);
+            }
+        }
+
+        private void Error()
+        {
+            if (error == true)
+            {
+                Logic.PerformClick(clearall);
+                error = false;
+                last = "";
             }
         }
     }
