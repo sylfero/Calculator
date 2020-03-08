@@ -39,10 +39,10 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Name="seven" Content="7" Click="Number_Click"/>
-                <Button Grid.Column="1" Name="eight" Content="8" Click="Number_Click"/>
-                <Button Grid.Column="2" Name="nine" Content="9" Click="Number_Click"/>
-                <Button Grid.Column="3" Name="divide" Content="/" Style="{DynamicResource Action}" Click="Action_Click"/>
+                <Button Grid.Column="0" Name="seven" Content="7" Click="Number_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="1" Name="eight" Content="8" Click="Number_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="2" Name="nine" Content="9" Click="Number_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="3" Name="divide" Content="/" Style="{DynamicResource Action}" Click="Action_Click" PreviewKeyDown="Block_Enter"/>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -53,10 +53,10 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Name="four" Content="4" Click="Number_Click"/>
-                <Button Grid.Column="1" Name="five"  Content="5" Click="Number_Click"/>
-                <Button Grid.Column="2" Name="six" Content="6" Click="Number_Click"/>
-                <Button Grid.Column="3" Name="multiply" Content="X" Style="{DynamicResource Action}" Click="Action_Click"/>
+                <Button Grid.Column="0" Name="four" Content="4" Click="Number_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="1" Name="five"  Content="5" Click="Number_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="2" Name="six" Content="6" Click="Number_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="3" Name="multiply" Content="*" Style="{DynamicResource Action}" Click="Action_Click" PreviewKeyDown="Block_Enter"/>
             </Grid>
 
             <Grid Grid.Row="2">
@@ -67,10 +67,10 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Name="one" Content="1" Click="Number_Click"/>
-                <Button Grid.Column="1" Name="two" Content="2" Click="Number_Click"/>
-                <Button Grid.Column="2" Name="three" Content="3" Click="Number_Click"/>
-                <Button Grid.Column="3" Name="minus" Content="-" Style="{DynamicResource Action}" Click="Action_Click"/>
+                <Button Grid.Column="0" Name="one" Content="1" Click="Number_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="1" Name="two" Content="2" Click="Number_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="2" Name="three" Content="3" Click="Number_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="3" Name="minus" Content="-" Style="{DynamicResource Action}" Click="Action_Click" PreviewKeyDown="Block_Enter"/>
             </Grid>
 
             <Grid Grid.Row="3">
@@ -81,10 +81,10 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Name="negation" Content="+/-" Click="Negation_Click"/>
-                <Button Grid.Column="1" Name="zero" Content="0" Click="Zero_Click"/>
-                <Button Grid.Column="2" Name="point" Content="," Click="Point_Click"/>
-                <Button Grid.Column="3" Name="add" Content="+" Style="{DynamicResource Action}"/>
+                <Button Grid.Column="0" Name="negation" Content="+/-" Click="Negation_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="1" Name="zero" Content="0" Click="Zero_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="2" Name="point" Content="," Click="Point_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="3" Name="add" Content="+" Style="{DynamicResource Action}" Click="Action_Click" PreviewKeyDown="Block_Enter"/>
             </Grid>
 
             <Grid Grid.Row="4">
@@ -95,10 +95,10 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Name="backspace" Content="&#9003;" Style="{DynamicResource Action}" Click="Backspace_Click"/>
-                <Button Grid.Column="1" Name="clearall" Content="C" Style="{DynamicResource Action}" Click="ClearAll_Click"/>
-                <Button Grid.Column="2" Name="clear" Content="CE" Style="{DynamicResource Action}" Click="Clear_Click"/>
-                <Button Grid.Column="3" Name="equals" Content="=" Style="{DynamicResource Equals}" Click="Equals_Click"/>
+                <Button Grid.Column="0" Name="backspace" Content="&#9003;" Style="{DynamicResource Action}" Click="Backspace_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="1" Name="clearall" Content="C" Style="{DynamicResource Action}" Click="ClearAll_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="2" Name="clear" Content="CE" Style="{DynamicResource Action}" Click="Clear_Click" PreviewKeyDown="Block_Enter"/>
+                <Button Grid.Column="3" Name="equals" Content="=" Style="{DynamicResource Equals}" Click="Equals_Click" PreviewKeyDown="Block_Enter"/>
             </Grid>
         </Grid>
     </Grid>
