@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,21 +111,21 @@ namespace Calculator
 
                     if (elements[index] == "/")
                     {
-                        tmp = Decimal.Parse(elements[index - 1]) / Decimal.Parse(elements[index + 1]);
+                        tmp = Decimal.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) / Decimal.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
                     }
                     else if (elements[index] == "*")
                     {
-                        tmp = Decimal.Parse(elements[index - 1]) * Decimal.Parse(elements[index + 1]);
+                        tmp = Decimal.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) * Decimal.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
                     }
                     else if (elements[index] == "+")
                     {
-                        tmp = Decimal.Parse(elements[index - 1]) + Decimal.Parse(elements[index + 1]);
+                        tmp = Decimal.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) + Decimal.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
                     }
                     else
                     {
-                        tmp = Decimal.Parse(elements[index - 1]) - Decimal.Parse(elements[index + 1]);
+                        tmp = Decimal.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) - Decimal.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
                     }
-                    elements[index] = Decimal.Round(tmp, 16).ToString();
+                    elements[index] = Decimal.Round(tmp, 16).ToString().Replace('.', ',');
                     elements.RemoveAt(index + 1);
                     elements.RemoveAt(index - 1);
                 }

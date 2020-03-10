@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,7 +91,7 @@ namespace Calculator
             {
                 if (!input.Text.Equals("0"))
                 {
-                    if ((input.Text.Length == 2 && Decimal.Parse(input.Text) < 0) || input.Text.Length == 1)
+                    if ((input.Text.Length == 2 && Decimal.Parse(input.Text.Replace(',', '.'), CultureInfo.InvariantCulture) < 0) || input.Text.Length == 1)
                     {
                         input.Text = "0";
                     }
@@ -212,9 +213,9 @@ namespace Calculator
         private void Negation_Click(object sender, RoutedEventArgs e)
         {
             Error();
-            if (Decimal.Parse(input.Text) != 0)
+            if (Decimal.Parse(input.Text.Replace(',', '.'), CultureInfo.InvariantCulture) != 0)
             {
-                if (Decimal.Parse(input.Text) < 0)
+                if (Decimal.Parse(input.Text.Replace(',', '.'), CultureInfo.InvariantCulture) < 0)
                 {
                     input.Text = input.Text.Remove(0, 1);
                 }
