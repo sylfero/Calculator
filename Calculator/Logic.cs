@@ -97,7 +97,7 @@ namespace Calculator
             {
                 List<string> elements = calc.Split(' ').ToList();
                 int index;
-                decimal tmp;
+                double tmp;
                 while (elements.Count() > 1)
                 {
                     if (elements.Contains("/") || elements.Contains("*"))
@@ -108,24 +108,23 @@ namespace Calculator
                     {
                         index = elements.FindIndex(x => x == "+" || x == "-");
                     }
-
                     if (elements[index] == "/")
                     {
-                        tmp = Decimal.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) / Decimal.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
+                        tmp = Double.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) / Double.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
                     }
                     else if (elements[index] == "*")
                     {
-                        tmp = Decimal.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) * Decimal.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
+                        tmp = Double.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) * Double.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
                     }
                     else if (elements[index] == "+")
                     {
-                        tmp = Decimal.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) + Decimal.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
+                        tmp = Double.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) + Double.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
                     }
                     else
                     {
-                        tmp = Decimal.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) - Decimal.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
+                        tmp = Double.Parse(elements[index - 1].Replace(',', '.'), CultureInfo.InvariantCulture) - Double.Parse(elements[index + 1].Replace(',', '.'), CultureInfo.InvariantCulture);
                     }
-                    elements[index] = Decimal.Round(tmp, 16).ToString().Replace('.', ',');
+                    elements[index] = Math.Round(tmp, 12).ToString().Replace('.', ',');
                     elements.RemoveAt(index + 1);
                     elements.RemoveAt(index - 1);
                 }
